@@ -21,13 +21,7 @@ class Bin:
         else:
             return f"{self.name} has latitude {self.lat:.2f}, longitude {self.long:.2f} , is not full, and has weight {self.weight:.2f} kg " 
 
-if __name__ == "__main__":
-    bin1 = Bin("bin1",3,4,False,5)
-    print(bin1)
-    bin1.update(5,6,True,7)
-    print(bin1)
-    print(bin1.get_location())
-    print(bin1.get_weight())
+
    
 
 
