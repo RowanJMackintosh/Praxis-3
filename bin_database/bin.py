@@ -1,5 +1,6 @@
 class Bin:
-    def __init__(self, lat, long, full, weight):
+    def __init__(self, name,lat, long, full, weight):
+        self.name = name #this is the name is the variable - useful for printing out the information about the bin but can delete this later
         self.lat = lat #float for latitude of bin
         self.long = long #float for longitude of bin
         self.full = full #boolean for whether bin is full - True means it's full
@@ -15,14 +16,19 @@ class Bin:
         self.weight = weight
     def __str__(self):
         if self.full == True:
-            return f"{self} has latitude {self.lat:.2f}, longitude {self.long:.2f} , is full, and has weight {self.weight:.2f} kg " 
+            return f"{self.name} has latitude {self.lat:.2f}, longitude {self.long:.2f}, is full, and has weight {self.weight:.2f} kg" 
+        #note can't do print self which is why I used self.name
         else:
-            return f"{self} has latitude {self.lat:.2f}, longitude {self.long:.2f} , is not full, and has weight {self.weight:.2f} kg " 
+            return f"{self.name} has latitude {self.lat:.2f}, longitude {self.long:.2f} , is not full, and has weight {self.weight:.2f} kg " 
 
 if __name__ == "__main__":
-    bin2 = Bin(3,4,False,5)
-    print(str(bin2))
-    bin2.update(5,6,True,7)
-    print(str(bin2))
+    bin1 = Bin("bin1",3,4,False,5)
+    print(bin1)
+    bin1.update(5,6,True,7)
+    print(bin1)
+    print(bin1.get_location())
+    print(bin1.get_weight())
+   
+
 
 
