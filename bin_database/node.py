@@ -1,3 +1,7 @@
+"""
+I thought we agreed on not structuring our "database" as a tree and instead we were just going to use a python list, so I don't know why this even exists.
+"""
+
 class Node:
     def __init__(self):
         self.parent=Node()
