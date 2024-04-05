@@ -81,8 +81,7 @@ class Database:
 
         bin.update(latitude_i, longitude_i, full_state, weight)
 
-        # call the map to let it know it needs to update the bins
-        map.update()
+    
 
  
     @classmethod
