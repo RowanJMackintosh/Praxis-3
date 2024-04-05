@@ -66,15 +66,34 @@ class Database:
         '''
         # convert latitude and longitude
         latitude_i, longitude_i = ll_adjust(latitude, longitude)
+        error = 0.1 #this is to see how much variance we want from the recorded latitude and longitude values for the bin. This can be changed depending on how much
+        #variance we typically expect to see in the latitude and longitude values
         
         # find the bin
-        # This could be done with a list comprehension filter like this:
-        #   bin = [bin for bin in cls.bin_data if latitude_i == bin.latitude and longitude_i < bin.longitude][0]
-        # but the expanded for is more obvious
+
+        filtered = cls.filter_by_latitude_longitude(cls,latitude-error,latitude+error,longitude-error,longitude+error)
+        min_e_lat = 10000000 #this is to keep track of the minimum difference from the given latitude - we use a very large number to make sure that the actual min replaces this on the first call
+        max_e_long = 10000000 #this is to keep track of the min difference from the given longitude
+        ideal_index = 0 #this gives the index of the bin in filtered that is closest to the given lat and long
+        i=0 #this keeps track of which bin we are currently on in  filtered
+        #this function finds which bin in the filtered list is closest to the given latitude and longitude
+        for bin in filtered:
+            e_lat = abs(latitude_i -bin.latitude)
+            e_long = abs(longitude_i - bin.longitude)
+            if e_lat < min_e_lat and e_long < min_e_long:
+                min_e_lat = e_lat
+                min_e_long = e_long
+                ideal_index = i
+            i += 1
+
+        #this function finds the bin in the bin database that is closest (linearly) to the given latitude and longitude and then updates the info related to the bin
+        ideal_bin_id = filtered[i].id
         for bin in cls.bin_data:
-            if latitude_i == bin.latitude and longitude_i < bin.longitude:
+             if ideal_bin_id == bin.id:
+                bin.full = full_state
+                bin.weight = weight
                 break
-             
+  
         if not bin:
         # This should not happen. The bin at this location was not found in the database
            print(f"ERROR: bin with latitude and longitude ({latitude}, {longitude} not found!") 
