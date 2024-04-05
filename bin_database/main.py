@@ -24,7 +24,7 @@ while True:
     load = temp[2]
     lat = temp[3]
     long = temp[4]
-    cls.find_and_update_bin(cls, lat, long, full_status(load), load) #do i need to make my own find and replace function
+    database.cls.find_and_update_bin(database.cls, lat, long, full_status(load), load) #do i need to make my own find and replace function
     map.update()
     
  
