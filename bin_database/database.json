@@ -1,0 +1,5 @@
+[{"id": 1, "lat": 43.6632, "long":-79.38315, "full": true, "weight": 10000},
+ {"id": 2, "lat": 43.6619, "long":-79.3995, "full": false, "weight": 1000},
+ {"id": 3, "lat": 43.65228, "long":-79.3914, "full": false, "weight": 0}
+]
+

@@ -1,6 +1,6 @@
 import datetime
 
-class full_record:
+class Full_record:
     def __init__(self, time, weight):
         self.time = time # Time in datetime format when the weight update occured
         self.weight = weight
@@ -33,7 +33,7 @@ class Bin:
         self.weight = weight
 
         # need to create a full_rec and append it to full_rec_list
-        self.full_rec_list.append(full_record(datetime.now(), self.weight))
+        self.full_rec_list.append(Full_record(datetime.now(), self.weight))
 
 
     def __str__(self):

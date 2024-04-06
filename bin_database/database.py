@@ -1,7 +1,7 @@
 import json
+from pathlib import Path
 
 import bin
-import map
 
 '''
 The "database" here is a python list of Bin's
@@ -10,26 +10,41 @@ This does not make sense to use this class as instances since there is only one 
 class variables for the internal data and class methods, rather then instance methods
 '''
 
-FILEPATH = "???" # This needs to contain the path inside the android to the file we are persisting the "database" to,
+# This needs to contain the path inside the android to the file we are persisting the "database" to
+FILENAME = "database.json"
+FILEPATH = Path(__file__).with_name(FILENAME)
 
 # This is to take the float representation of the latitude and longitude and map it to the fixed decimal version we are using in the database
 LL_DIGITS = 10 ** 5
 
 def ll_adjust(latitude, longitude):
-        '''
-         Take the float representation of the latitude and longitude and map it to the fixed decimal version we are using in the database
-         '''
-        latitude_i = int(latitude * LL_DIGITS)
-        longitude_i = int(longitude * LL_DIGITS)
-        return (latitude_i, longitude_i)
+    '''
+    Take the float representation of the latitude and longitude and map it to the fixed decimal version we are using in the database
+    '''
+    latitude_i = int(latitude * LL_DIGITS)
+    longitude_i = int(longitude * LL_DIGITS)
+    return (latitude_i, longitude_i)
+
 
 def ll_adjust_reverse(latitude_i, longitude_i):
-        '''
-         Take the fixed decimal version of latitude and longitude we are using in the database and convert it back to the float representation
-         '''
-        latitude = latitude_i / LL_DIGITS
-        longitude = longitude_i / LL_DIGITS
-        return (latitude, longitude)
+    '''
+    Take the fixed decimal version of latitude and longitude we are using in the database and convert it back to the float representation
+    '''
+    latitude = latitude_i / LL_DIGITS
+    longitude = longitude_i / LL_DIGITS
+    return (latitude, longitude)
+
+
+def bin_ll_adjust_reverse(bin_a):
+    '''
+    Take the fixed decimal version of latitude and longitude we are using in the database and convert it back to the float representation.
+    We stuff it back into a Bin just so we can pass it back as a unit to the caller.
+    This is called to convert a bin for sending it out the network.
+    '''
+    latitude, longitude = ll_adjust_reverse(bin_a.lat, bin_a.long)
+    bin_ = bin.Bin(bin_a.id, latitude, longitude, bin_a.full, bin_a.weight)
+
+    return bin_
 
 
 class Database:
@@ -58,6 +73,8 @@ class Database:
     I expect others to add/write more class methods to fill in the rest of what is needed to access/filter/operate on the bins "database"
     '''
     
+    # FIX: change this to find the bin that is the closest linear distance to the given lat/log and assume that's the bin
+    #       maybe have 
     @classmethod
     def find_and_update_bin(cls, latitude, longitude, full_state, weight):
         '''
@@ -81,8 +98,7 @@ class Database:
 
         bin.update(latitude_i, longitude_i, full_state, weight)
 
-        # call the map to let it know it needs to update the bins
-        map.update()
+        return bin
 
  
     @classmethod
@@ -95,7 +111,7 @@ class Database:
         max_latitude_i, max_longitude_i = ll_adjust(max_latitude, max_longitude)
 
         # find the bins that lie within the specified latitude and logitude range
-        filtered_bins = [bin for bin in cls.bin_data if min_latitude_i < bin.latitude < max_latitude_i and min_longitude_i < bin.longitude < max_longitude_i]
+        filtered_bins = [bin for bin in cls.bin_data if min_latitude_i < bin.lat and bin.lat < max_latitude_i and min_longitude_i < bin.long and bin.long < max_longitude_i]
 
         return filtered_bins
         
@@ -115,4 +131,6 @@ class Database:
         A method to load in the persisted bin_data from a file
         '''
         with open(FILEPATH, "r") as file:
-            cls.bin_data = json.load(file)
+            json_data = json.load(file)
+            for datum in json_data:    
+                cls.bin_data.append(bin.Bin(**datum))
