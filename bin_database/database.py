@@ -33,9 +33,50 @@ class Database:
     I expect others to add/write more class methods to fill in the rest of what is needed to access/filter/operate on the bins "database"
     '''
     
-    # FIX: change this to find the bin that is the closest linear distance to the given lat/log and assume that's the bin
-    #       maybe have 
     @classmethod
+    def find_and_update_closest_bin(cls, latitude, longitude, full_state, weight):
+        '''
+        This take a latitude and longitude and uses that to find the apropriate bin in the "database".
+        It then updates the data related to that bin.
+        '''
+        
+        error = 0.1 #this is to see how much variance we want from the recorded latitude and longitude values for the bin. This can be changed depending on how much
+        #variance we typically expect to see in the latitude and longitude values
+        
+        # find the bin
+
+        filtered = cls.filter_by_latitude_longitude(cls,latitude-error,latitude+error,longitude-error,longitude+error)
+        min_dist_squared = 10000000 #this is to keep track of the minimum distance (squared) - we use a very large number to make sure that the actual min replaces this on the first call
+        ideal_index = 0 #this gives the index of the bin in filtered that is closest to the given lat and long
+        i=0 #this keeps track of which bin we are currently on in  filtered
+        #this function finds which bin in the filtered list is closest to the given latitude and longitude
+        for bin in filtered:
+            e_lat = abs(latitude -bin.latitude)
+            e_long = abs(longitude - bin.longitude)
+            e_dist_squared = e_lat**2 + e_long**2
+            if e_dist_squared < min_dist_squared
+                min_dist_squared = e_dist_squared
+                ideal_index = i
+            i += 1
+
+        #this function finds the bin in the bin database that is closest (linearly) to the given latitude and longitude and then updates the info related to the bin
+        ideal_bin_id = filtered[i].id
+        for bin in cls.bin_data:
+             if ideal_bin_id == bin.id:
+                bin.full = full_state
+                bin.weight = weight
+                break
+
+        if not bin:
+        # This should not happen. The bin at this location was not found in the database
+           print(f"ERROR: bin with latitude and longitude ({latitude}, {longitude} not found!") 
+
+        bin.update(latitude, longitude, full_state, weight)
+
+        return bin
+
+
+   @classmethod
     def find_and_update_bin(cls, latitude, longitude, full_state, weight):
         '''
         This take a latitude and longitude and uses that to find the apropriate bin in the "database".
@@ -49,7 +90,7 @@ class Database:
         for bin in cls.bin_data:
             if latitude == bin.latitude and longitude == bin.longitude:
                 break
-             
+
         if not bin:
         # This should not happen. The bin at this location was not found in the database
            print(f"ERROR: bin with latitude and longitude ({latitude}, {longitude} not found!") 
@@ -57,6 +98,7 @@ class Database:
         bin.update(latitude, longitude, full_state, weight)
 
         return bin
+
 
  
     @classmethod
