@@ -38,6 +38,6 @@ class Bin:
 
     def __str__(self):
         if self.full == True:
-            return f"{self.id} has latitude {self.lat:.2f}, longitude {self.long:.2f}, is full, and has weight {self.weight:.2f} kg" 
+            return f"{self.id} has latitude {self.lat:.5f}, longitude {self.long:.5f}, is full, and has weight {self.weight:.2f} kg" 
         else:
-            return f"{self.id} has latitude {self.lat:.2f}, longitude {self.long:.2f} , is not full, and has weight {self.weight:.2f} kg " 
+            return f"{self.id} has latitude {self.lat:.5f}, longitude {self.long:.5f} , is not full, and has weight {self.weight:.2f} kg " 

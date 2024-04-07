@@ -1,5 +1,6 @@
 
 import signal
+import time
 
 import database
 import testServer
@@ -24,7 +25,9 @@ def initialise():
 
     # walk through and send the database of bins to the map app
     for bin in  database.Database.filter_by_latitude_longitude(-90, 90, -180, 180):
-        map.update(database.bin_ll_adjust_reverse(bin))
+        time.sleep(5)
+        print(f"bin{bin}")
+        map.update(bin)
 
 
 
@@ -40,7 +43,7 @@ def main():
     while (True):
         # fetch a bin update from the bin web thing and parse it into something we can use
 
-        ??? 
+        ???
 
         # use the latitude and longitude from the update to find the bin that is the closest distance to 
         # this position and assume it is that bin. Maybe should check that the distance is not too reduculous?
@@ -48,7 +51,7 @@ def main():
         bin = database.Database.find_and_update_bin(latitude, longitude, full_state, weight)
 
         if bin:
-            map.update(database.bin_ll_adjust_reverse(bin))
+            map.update(bin)
         else:
             print(f"Could not find matching bin for latitude: {latitude}, longitude: {longitude}. Discarding update!!")
 
