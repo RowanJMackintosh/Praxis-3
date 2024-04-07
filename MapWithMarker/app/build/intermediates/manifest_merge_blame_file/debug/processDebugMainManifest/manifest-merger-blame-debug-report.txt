@@ -1,0 +1,151 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<!--
+3 Copyright 2020 Google LLC
+4
+5 Licensed under the Apache License, Version 2.0 (the "License");
+6 you may not use this file except in compliance with the License.
+7 You may obtain a copy of the License at
+8
+9      http://www.apache.org/licenses/LICENSE-2.0
+10
+11 Unless required by applicable law or agreed to in writing, software
+12 distributed under the License is distributed on an "AS IS" BASIS,
+13 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+14 See the License for the specific language governing permissions and
+15 limitations under the License.
+16-->
+17<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+18    package="com.example.mapwithmarker"
+19    android:versionCode="1"
+20    android:versionName="1.0" >
+21
+22    <uses-sdk
+23        android:minSdkVersion="19"
+24        android:targetSdkVersion="34" />
+25
+26    <!-- Include required permissions for Google Maps API to run. -->
+27    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+27-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\rowan\.gradle\caches\transforms-3\e4435d8bdef155d627a99d6def37cf87\transformed\play-services-maps-18.2.0\AndroidManifest.xml:23:5-79
+27-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\rowan\.gradle\caches\transforms-3\e4435d8bdef155d627a99d6def37cf87\transformed\play-services-maps-18.2.0\AndroidManifest.xml:23:22-76
+28    <uses-permission android:name="android.permission.INTERNET" />
+28-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\rowan\.gradle\caches\transforms-3\e4435d8bdef155d627a99d6def37cf87\transformed\play-services-maps-18.2.0\AndroidManifest.xml:24:5-67
+28-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\rowan\.gradle\caches\transforms-3\e4435d8bdef155d627a99d6def37cf87\transformed\play-services-maps-18.2.0\AndroidManifest.xml:24:22-64
+29
+30    <uses-feature
+30-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\rowan\.gradle\caches\transforms-3\e4435d8bdef155d627a99d6def37cf87\transformed\play-services-maps-18.2.0\AndroidManifest.xml:26:5-28:35
+31        android:glEsVersion="0x00020000"
+31-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\rowan\.gradle\caches\transforms-3\e4435d8bdef155d627a99d6def37cf87\transformed\play-services-maps-18.2.0\AndroidManifest.xml:27:9-41
+32        android:required="true" />
+32-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\rowan\.gradle\caches\transforms-3\e4435d8bdef155d627a99d6def37cf87\transformed\play-services-maps-18.2.0\AndroidManifest.xml:28:9-32
+33
+34    <queries>
+34-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\rowan\.gradle\caches\transforms-3\e4435d8bdef155d627a99d6def37cf87\transformed\play-services-maps-18.2.0\AndroidManifest.xml:30:5-34:15
+35
+36        <!-- Needs to be explicitly declared on Android R+ -->
+37        <package android:name="com.google.android.apps.maps" />
+37-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\rowan\.gradle\caches\transforms-3\e4435d8bdef155d627a99d6def37cf87\transformed\play-services-maps-18.2.0\AndroidManifest.xml:33:9-64
+37-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\rowan\.gradle\caches\transforms-3\e4435d8bdef155d627a99d6def37cf87\transformed\play-services-maps-18.2.0\AndroidManifest.xml:33:18-61
+38    </queries>
+39
+40    <permission
+40-->[androidx.core:core:1.9.0] C:\Users\rowan\.gradle\caches\transforms-3\8e44c0b83a1a5f6b87fd9f75278c6fd6\transformed\core-1.9.0\AndroidManifest.xml:22:5-24:47
+41        android:name="com.example.mapwithmarker.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+41-->[androidx.core:core:1.9.0] C:\Users\rowan\.gradle\caches\transforms-3\8e44c0b83a1a5f6b87fd9f75278c6fd6\transformed\core-1.9.0\AndroidManifest.xml:23:9-81
+42        android:protectionLevel="signature" />
+42-->[androidx.core:core:1.9.0] C:\Users\rowan\.gradle\caches\transforms-3\8e44c0b83a1a5f6b87fd9f75278c6fd6\transformed\core-1.9.0\AndroidManifest.xml:24:9-44
+43
+44    <uses-permission android:name="com.example.mapwithmarker.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+44-->[androidx.core:core:1.9.0] C:\Users\rowan\.gradle\caches\transforms-3\8e44c0b83a1a5f6b87fd9f75278c6fd6\transformed\core-1.9.0\AndroidManifest.xml:26:5-97
+44-->[androidx.core:core:1.9.0] C:\Users\rowan\.gradle\caches\transforms-3\8e44c0b83a1a5f6b87fd9f75278c6fd6\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
+45
+46    <application
+46-->C:\Users\rowan\Desktop\android-samples-main\tutorials\java\MapWithMarker\app\src\main\AndroidManifest.xml:20:5-48:19
+47        android:allowBackup="true"
+47-->C:\Users\rowan\Desktop\android-samples-main\tutorials\java\MapWithMarker\app\src\main\AndroidManifest.xml:21:9-35
+48        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+48-->[androidx.core:core:1.9.0] C:\Users\rowan\.gradle\caches\transforms-3\8e44c0b83a1a5f6b87fd9f75278c6fd6\transformed\core-1.9.0\AndroidManifest.xml:28:18-86
+49        android:debuggable="true"
+50        android:extractNativeLibs="true"
+51        android:icon="@mipmap/ic_launcher"
+51-->C:\Users\rowan\Desktop\android-samples-main\tutorials\java\MapWithMarker\app\src\main\AndroidManifest.xml:22:9-43
+52        android:label="@string/app_name"
+52-->C:\Users\rowan\Desktop\android-samples-main\tutorials\java\MapWithMarker\app\src\main\AndroidManifest.xml:23:9-41
+53        android:supportsRtl="true"
+53-->C:\Users\rowan\Desktop\android-samples-main\tutorials\java\MapWithMarker\app\src\main\AndroidManifest.xml:24:9-35
+54        android:testOnly="true"
+55        android:theme="@style/AppTheme" >
+55-->C:\Users\rowan\Desktop\android-samples-main\tutorials\java\MapWithMarker\app\src\main\AndroidManifest.xml:25:9-40
+56        <meta-data
+56-->C:\Users\rowan\Desktop\android-samples-main\tutorials\java\MapWithMarker\app\src\main\AndroidManifest.xml:27:9-29:69
+57            android:name="com.google.android.gms.version"
+57-->C:\Users\rowan\Desktop\android-samples-main\tutorials\java\MapWithMarker\app\src\main\AndroidManifest.xml:28:13-58
+58            android:value="@integer/google_play_services_version" />
+58-->C:\Users\rowan\Desktop\android-samples-main\tutorials\java\MapWithMarker\app\src\main\AndroidManifest.xml:29:13-66
+59
+60<!--              The API key for Google Maps-based APIs. -->
+61        <meta-data
+62            android:name="com.google.android.geo.API_KEY"
+62-->C:\Users\rowan\Desktop\android-samples-main\tutorials\java\MapWithMarker\app\src\main\AndroidManifest.xml:35:13-58
+63            android:value="AIzaSyC-7hniM24-mTwxnIezVoyxRzEInl9E2bs" />
+63-->C:\Users\rowan\Desktop\android-samples-main\tutorials\java\MapWithMarker\app\src\main\AndroidManifest.xml:36:13-44
+64
+65        <activity
+65-->C:\Users\rowan\Desktop\android-samples-main\tutorials\java\MapWithMarker\app\src\main\AndroidManifest.xml:38:9-47:20
+66            android:name="com.example.mapwithmarker.MapsMarkerActivity"
+66-->C:\Users\rowan\Desktop\android-samples-main\tutorials\java\MapWithMarker\app\src\main\AndroidManifest.xml:39:13-47
+67            android:exported="true"
+67-->C:\Users\rowan\Desktop\android-samples-main\tutorials\java\MapWithMarker\app\src\main\AndroidManifest.xml:41:13-36
+68            android:label="@string/title_activity_maps" >
+68-->C:\Users\rowan\Desktop\android-samples-main\tutorials\java\MapWithMarker\app\src\main\AndroidManifest.xml:40:13-56
+69            <intent-filter>
+69-->C:\Users\rowan\Desktop\android-samples-main\tutorials\java\MapWithMarker\app\src\main\AndroidManifest.xml:42:13-46:29
+70                <action android:name="android.intent.action.MAIN" />
+70-->C:\Users\rowan\Desktop\android-samples-main\tutorials\java\MapWithMarker\app\src\main\AndroidManifest.xml:43:17-69
+70-->C:\Users\rowan\Desktop\android-samples-main\tutorials\java\MapWithMarker\app\src\main\AndroidManifest.xml:43:25-66
+71
+72                <category android:name="android.intent.category.LAUNCHER" />
+72-->C:\Users\rowan\Desktop\android-samples-main\tutorials\java\MapWithMarker\app\src\main\AndroidManifest.xml:45:17-77
+72-->C:\Users\rowan\Desktop\android-samples-main\tutorials\java\MapWithMarker\app\src\main\AndroidManifest.xml:45:27-74
+73            </intent-filter>
+74        </activity>
+75        <!-- Needs to be explicitly declared on P+ -->
+76        <uses-library
+76-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\rowan\.gradle\caches\transforms-3\e4435d8bdef155d627a99d6def37cf87\transformed\play-services-maps-18.2.0\AndroidManifest.xml:39:9-41:40
+77            android:name="org.apache.http.legacy"
+77-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\rowan\.gradle\caches\transforms-3\e4435d8bdef155d627a99d6def37cf87\transformed\play-services-maps-18.2.0\AndroidManifest.xml:40:13-50
+78            android:required="false" />
+78-->[com.google.android.gms:play-services-maps:18.2.0] C:\Users\rowan\.gradle\caches\transforms-3\e4435d8bdef155d627a99d6def37cf87\transformed\play-services-maps-18.2.0\AndroidManifest.xml:41:13-37
+79
+80        <activity
+80-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\rowan\.gradle\caches\transforms-3\e2fb4df387628dfa246b5b8e5d73f619\transformed\play-services-base-18.0.1\AndroidManifest.xml:20:9-22:45
+81            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+81-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\rowan\.gradle\caches\transforms-3\e2fb4df387628dfa246b5b8e5d73f619\transformed\play-services-base-18.0.1\AndroidManifest.xml:20:19-85
+82            android:exported="false"
+82-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\rowan\.gradle\caches\transforms-3\e2fb4df387628dfa246b5b8e5d73f619\transformed\play-services-base-18.0.1\AndroidManifest.xml:22:19-43
+83            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+83-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\rowan\.gradle\caches\transforms-3\e2fb4df387628dfa246b5b8e5d73f619\transformed\play-services-base-18.0.1\AndroidManifest.xml:21:19-78
+84
+85        <provider
+85-->[androidx.emoji2:emoji2:1.2.0] C:\Users\rowan\.gradle\caches\transforms-3\edb2213e76ec3f214b04a95c1499c227\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+86            android:name="androidx.startup.InitializationProvider"
+86-->[androidx.emoji2:emoji2:1.2.0] C:\Users\rowan\.gradle\caches\transforms-3\edb2213e76ec3f214b04a95c1499c227\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
+87            android:authorities="com.example.mapwithmarker.androidx-startup"
+87-->[androidx.emoji2:emoji2:1.2.0] C:\Users\rowan\.gradle\caches\transforms-3\edb2213e76ec3f214b04a95c1499c227\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
+88            android:exported="false" >
+88-->[androidx.emoji2:emoji2:1.2.0] C:\Users\rowan\.gradle\caches\transforms-3\edb2213e76ec3f214b04a95c1499c227\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
+89            <meta-data
+89-->[androidx.emoji2:emoji2:1.2.0] C:\Users\rowan\.gradle\caches\transforms-3\edb2213e76ec3f214b04a95c1499c227\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+90                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+90-->[androidx.emoji2:emoji2:1.2.0] C:\Users\rowan\.gradle\caches\transforms-3\edb2213e76ec3f214b04a95c1499c227\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
+91                android:value="androidx.startup" />
+91-->[androidx.emoji2:emoji2:1.2.0] C:\Users\rowan\.gradle\caches\transforms-3\edb2213e76ec3f214b04a95c1499c227\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
+92            <meta-data
+92-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\rowan\.gradle\caches\transforms-3\0a30f7618551024cc5d1721d6992a471\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
+93                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+93-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\rowan\.gradle\caches\transforms-3\0a30f7618551024cc5d1721d6992a471\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
+94                android:value="androidx.startup" />
+94-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\rowan\.gradle\caches\transforms-3\0a30f7618551024cc5d1721d6992a471\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
+95        </provider>
+96    </application>
+97
+98</manifest>
