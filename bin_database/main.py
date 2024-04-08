@@ -2,16 +2,17 @@
 import signal
 import time
 
+import bin
 import database
 import testServer
 import map
+import bin_data_reader
 
 # This is set to true to use the for testing the client data that would be sent to the app
 USE_DEBUG_SERVER = True   
 
-
 def signal_handler(sig, frame):
-    print('You pressed Ctrl+C! Saving database jason to file.')
+    print('You pressed Ctrl+C! Saving database to json file.')
     database.Database.save()
 
 
@@ -30,32 +31,29 @@ def initialise():
         map.update(bin)
 
 
-
 def main():
     # Set up the signal handler to allow us to dump the database on demand
     signal.signal(signal.SIGINT, signal_handler)
     print('Press Ctrl+C at any time to save database state to json file. Program will not terminate.')
 
     initialise()
-
-
+    
     # Main loop fetches bin updates, updates the database and send the updates to the app over the network
     while (True):
         # fetch a bin update from the bin web thing and parse it into something we can use
 
-        ???
+        update_list = bin_data_reader.get_bin_updates()
+        for update in update_list:
+            # use the latitude and longitude from the update to find the bin that is the closest distance to 
+            # this position and assume it is that bin. Maybe should check that the distance is not too reduculous?
+            # update the database
+            bin = database.Database.find_and_update_bin(update.lat, update.long, update.full, update.weight)
 
-        # use the latitude and longitude from the update to find the bin that is the closest distance to 
-        # this position and assume it is that bin. Maybe should check that the distance is not too reduculous?
-        # update the database
-        bin = database.Database.find_and_update_bin(latitude, longitude, full_state, weight)
+            if bin:
+                map.update(bin)
+            else:
+                print(f"Could not find matching bin for latitude: {update.lat}, longitude: {update.long}. Discarding update!!")
 
-        if bin:
-            map.update(bin)
-        else:
-            print(f"Could not find matching bin for latitude: {latitude}, longitude: {longitude}. Discarding update!!")
-
-
-
+        
 if __name__ == "__main__":
     main()
