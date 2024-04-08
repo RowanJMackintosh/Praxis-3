@@ -16,9 +16,10 @@ while True:
     if prev_string != data_string:
         if os.path.exists("data_loader/readings.txt"):
             clear_file = (clear_file + 1)%30
-            file = open("data_loader/readings.txt", "a")
-            file.write(data_string.value + " | " + data_string.updated_at + "\n")
-            file.close()
+            with open("data_loader/readings.txt", "a+") as file:
+                file.write(data_string.value + " | " + data_string.updated_at + "\n")
     
     if clear_file == 29:
         open("data_loader/readings.txt", 'w').close()
+        
+        
