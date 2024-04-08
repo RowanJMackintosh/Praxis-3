@@ -1,10 +1,14 @@
 
 
+from pathlib import Path
 
 
 MAX_WEIGHT = 90
 
-BIN_UPDATE_FILE_PATH = "????"
+# This is for testing, Where is the real path?
+
+FILENAME = "example_readings.txt"
+BIN_UPDATE_FILE_PATH = Path(__file__).with_name(FILENAME)
 
 
 class Update:
@@ -13,6 +17,12 @@ class Update:
         self.long = long # float longitude of bin 
         self.full = full # boolean for whether bin is full - True means it's full
         self.weight = weight # int for the current weight of the bin in grams
+
+    def __str__(self):
+        if self.full == True:
+            return f"latitude {self.lat:.5f}, longitude {self.long:.5f}, is full, and has weight {self.weight:.2f} kg" 
+        else:
+            return f"latitude {self.lat:.5f}, longitude {self.long:.5f} , is not full, and has weight {self.weight:.2f} kg " 
 
 
 def full_status(weight):
@@ -61,7 +71,10 @@ def get_bin_updates():
                 sign = 1 if dir == "'E'" else -1
                 long = float(lat_s) * sign
 
-                updates.append(Update(lat, long, full_status(weight), weight))
+                update = Update(lat, long, full_status(weight), weight)
+                print(f"   update: {update}")
+                updates.append(update)
+                
             except ValueError:
                 continue
 

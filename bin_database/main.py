@@ -26,7 +26,7 @@ def initialise():
 
     # walk through and send the database of bins to the map app
     for bin in  database.Database.filter_by_latitude_longitude(-90, 90, -180, 180):
-        time.sleep(5)
+        #time.sleep(5)
         print(f"bin{bin}")
         map.update(bin)
 
@@ -50,10 +50,12 @@ def main():
             bin = database.Database.find_and_update_bin(update.lat, update.long, update.full, update.weight)
 
             if bin:
+                print(f"bin{bin}")
                 map.update(bin)
             else:
                 print(f"Could not find matching bin for latitude: {update.lat}, longitude: {update.long}. Discarding update!!")
 
+        break
         
 if __name__ == "__main__":
     main()
