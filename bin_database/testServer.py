@@ -11,10 +11,12 @@ class Test_Server:
     def __init__(self):
         self.port = network.PORT
         self.host = "127.0.0.1"
+        self.server = None
 
 
     def start(self):
-        threading.Thread(target=self.test_server).start()
+        self.server = threading.Thread(target=self.test_server)
+        self.server.start()
 
 
     def test_server(self):

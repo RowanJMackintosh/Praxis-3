@@ -3,8 +3,9 @@ from Adafruit_IO import Client
 import os
 
 prev_string = None
-clear_file = 0
-open("data_loader/readings.txt", 'w').close()
+#open("data_loader/readings.txt", 'w').close() not needed - the "a+" should create the file ifdoes not exist and you need that in the loop anyway
+
+FILENAME = "data_loader/readings.txt"
 
 while True:
     time.sleep(10)
@@ -13,13 +14,10 @@ while True:
     
     data_string = client.receive("information") 
     
+    # Not sure what this prev_string is about
     if prev_string != data_string:
-        if os.path.exists("data_loader/readings.txt"):
-            clear_file = (clear_file + 1)%30
-            with open("data_loader/readings.txt", "a+") as file:
-                file.write(data_string.value + " | " + data_string.updated_at + "\n")
+        with open(FILENAME, "a+") as file:
+            file.write(data_string.value + " | " + data_string.updated_at + "\n")
     
-    if clear_file == 29:
-        open("data_loader/readings.txt", 'w').close()
         
         
