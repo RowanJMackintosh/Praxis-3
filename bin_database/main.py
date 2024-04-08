@@ -50,12 +50,10 @@ def main():
             bin = database.Database.find_and_update_bin(update.lat, update.long, update.full, update.weight)
 
             if bin:
-                print(f"bin{bin}")
                 map.update(bin)
             else:
                 print(f"Could not find matching bin for latitude: {update.lat}, longitude: {update.long}. Discarding update!!")
 
-        break
         
 if __name__ == "__main__":
     main()

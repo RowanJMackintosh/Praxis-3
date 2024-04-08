@@ -72,7 +72,7 @@ def get_bin_updates():
                 long = float(lat_s) * sign
 
                 update = Update(lat, long, full_status(weight), weight)
-                print(f"   update: {update}")
+                #print(f"   update: {update}")
                 updates.append(update)
                 
             except ValueError:
