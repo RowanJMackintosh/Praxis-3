@@ -54,7 +54,7 @@ class Database:
             e_lat = abs(latitude -bin.latitude)
             e_long = abs(longitude - bin.longitude)
             e_dist_squared = e_lat**2 + e_long**2
-            if e_dist_squared < min_dist_squared
+            if e_dist_squared < min_dist_squared:
                 min_dist_squared = e_dist_squared
                 ideal_index = i
             i += 1
@@ -71,12 +71,12 @@ class Database:
         # This should not happen. The bin at this location was not found in the database
            print(f"ERROR: bin with latitude and longitude ({latitude}, {longitude} not found!") 
 
-        bin.update(latitude, longitude, full_state, weight)
+        bin.update(bin.lat, bin.long, full_state, weight)
 
         return bin
 
 
-   @classmethod
+    @classmethod
     def find_and_update_bin(cls, latitude, longitude, full_state, weight):
         '''
         This take a latitude and longitude and uses that to find the apropriate bin in the "database".
@@ -88,14 +88,14 @@ class Database:
         #   bin = [bin for bin in cls.bin_data if latitude == bin.latitude and longitude == bin.longitude][0]
         # but the expanded for is more obvious
         for bin in cls.bin_data:
-            if latitude == bin.latitude and longitude == bin.longitude:
+            if latitude == bin.lat and longitude == bin.long:
                 break
 
         if not bin:
         # This should not happen. The bin at this location was not found in the database
            print(f"ERROR: bin with latitude and longitude ({latitude}, {longitude} not found!") 
 
-        bin.update(latitude, longitude, full_state, weight)
+        bin.update(bin.lat, bin.long, full_state, weight)
 
         return bin
 

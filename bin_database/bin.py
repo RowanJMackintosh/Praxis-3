@@ -9,8 +9,8 @@ class Full_record:
 class Bin:
     def __init__(self, id, lat, long, full, weight):
         self.id = id # int representing the id of the bin - if moved to a database model this would correspond to the primary key column in the bin database
-        self.lat = lat # shifted int for latitude of bin - these values can be best represented as integeres with a fixed decimal place shift (5?) rather than a float 
-        self.long = long # shifted int for longitude of bin - these values can be best represented as integeres with a fixed decimal place shift (5?) rather than a float
+        self.lat = lat # float latitude of bin
+        self.long = long # float longitude of bin 
         self.full = full # boolean for whether bin is full - True means it's full
         self.weight = weight # int for the current weight of the bin in grams
         self.full_rec_list = [] # this is going to be an array of full_record() entries appended to as weight updates come in (this is for later data mining)
@@ -33,7 +33,7 @@ class Bin:
         self.weight = weight
 
         # need to create a full_rec and append it to full_rec_list
-        self.full_rec_list.append(Full_record(datetime.now(), self.weight))
+        self.full_rec_list.append(Full_record(datetime.datetime.now(), self.weight))
 
 
     def __str__(self):
