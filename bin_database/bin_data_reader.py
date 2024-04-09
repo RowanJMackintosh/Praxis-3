@@ -2,15 +2,17 @@
 import os
 import threading
 from pathlib import Path
+from Adafruit_IO import Client
 
 
 MAX_WEIGHT = 90
 
 # FIX - This is for testing, Where is the real path?
 
-FILENAME = "example_readings.txt"
-BIN_UPDATE_FILE_PATH = Path(__file__).with_name(FILENAME)
+#FILENAME = "example_readings.txt"
+#BIN_UPDATE_FILE_PATH = Path(__file__).with_name(FILENAME)
 
+BIN_UPDATE_FILE_PATH = os.path.dirname(os.path.dirname(__file__)) + "/data_loader/readings.txt"
 
 class Update:
     def __init__(self, lat, long, full, weight):
@@ -31,33 +33,43 @@ def full_status(weight):
         return True
     return False
     
+#def get_bin_updates():
+    updates = []
+
+    client = Client("aragolaa", "aio_LfUu68p7cpa5GuH3rscznuLAFkVj")
+
+    data_string = client.receive("information")
+   
+    for line in data_string.value:
+        update = parse_update(line)
+        if update:
+            updates.append(update)
+    return updates
+
 def get_bin_updates():
     updates = []
 
+    with open(BIN_UPDATE_FILE_PATH, "r") as first_file, open("temp_file.txt", "w") as second_file:
+        for line in first_file:
+            second_file.write(line)
 
-    new_file = BIN_UPDATE_FILE_PATH+"_tmp"
-    try:
-        os.rename(BIN_UPDATE_FILE_PATH, new_file)
+    with open("temp_file.txt", "r") as file: #fill in the name of the file
 
-        with open(new_file, "r") as file: #fill in the name of the file
+        while True:
+            # Get next line from file
+            line = file.readline()
+            # if line is empty
+            # end of file is reached
+            if not line:
+                break
 
-            while True:
-                temp = []
-            
-                # Get next line from file
-                line = file.readline()
-                # if line is empty
-                # end of file is reached
-                if not line:
-                    break
-
-                update = parse_update(line)
-                if update:
-                    updates.append(update)
-    except FileNotFoundError:
-        return None
-    finally:
-        os.remove(new_file)
+            update = parse_update(line)
+            #print(update)
+            if update:
+                updates.append(update)
+        
+    os.remove("temp_file.txt")
+    return updates
 
 
 def parse_update(line):
@@ -73,11 +85,17 @@ def parse_update(line):
     try:
         # This first string will look like this "57.562,3.859,-1271.0,"
         US1_s, US2_s, load_s, _ = first.split(",")
+        
+        US1 = bool(int(US1_s))
+        US2 = bool(int(US2_s))
+        full = US1 or US2
+
         # load_s looks like "-1271.0" and we want an int so we need to convert the string to a float, then an int
         weight = int(float(load_s)/1000)
 
         # second looks like this "[0.0, 'N'], [0.0, 'W'])" and we need to get signed floats from this. Not N/S E/W.
         _, lat_temp_s, long_temp_s = second.split("[")
+
         # will now look something like "0.0, 'N'], "
         lat_s, dir = lat_temp_s.split("]")[0].split(", ")
         sign = 1 if dir == "'N'" else -1
@@ -85,9 +103,9 @@ def parse_update(line):
         
         long_s, dir = long_temp_s.split("]")[0].split(", ")
         sign = 1 if dir == "'E'" else -1
-        long = float(lat_s) * sign
+        long = float(long_s) * sign
 
-        update = Update(lat, long, full_status(weight), weight)
+        update = Update(lat, long, full, weight)
         #print(f"   update: {update}")
         return update
         

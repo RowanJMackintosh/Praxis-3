@@ -9,7 +9,7 @@ import map
 import bin_data_reader
 
 # This is set to true to use the for testing the client data that would be sent to the app
-USE_DEBUG_SERVER = True   
+USE_DEBUG_SERVER = False   
 
 def signal_handler(sig, frame):
     print('You pressed Ctrl+C! Saving database to json file.')
@@ -28,7 +28,7 @@ def initialise():
 
     # walk through and send the database of bins to the map app
     for bin in  database.Database.filter_by_latitude_longitude(-90, 90, -180, 180):
-        time.sleep(5)
+        time.sleep(2)
         print(f"bin{bin}")
         map.update(bin)
 

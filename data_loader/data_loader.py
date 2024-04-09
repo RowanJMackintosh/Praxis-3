@@ -2,22 +2,21 @@ import time
 from Adafruit_IO import Client
 import os
 
-prev_string = None
-#open("data_loader/readings.txt", 'w').close() not needed - the "a+" should create the file ifdoes not exist and you need that in the loop anyway
-
-FILENAME = "data_loader/readings.txt"
+client = Client("aragolaa", "aio_LfUu68p7cpa5GuH3rscznuLAFkVj")
+prev_string = client.receive("information")
+clear_file = 0
+open("readings.txt", 'w').close()
 
 while True:
     time.sleep(10)
-    
-    client = Client("aragolaa", "aio_LfUu68p7cpa5GuH3rscznuLAFkVj")
-    
     data_string = client.receive("information") 
     
-    # Not sure what this prev_string is about
     if prev_string != data_string:
-        with open(FILENAME, "a+") as file:
-            file.write(data_string.value + " | " + data_string.updated_at + "\n")
+        if os.path.exists("readings.txt"):
+            clear_file = (clear_file + 1)%30
+            with open("readings.txt", "a+") as file:
+                file.write(data_string.value + " | " + data_string.updated_at + "\n")
+    prev_string = data_string
     
-        
-        
+    if clear_file == 9:
+        open("readings.txt", 'w').close()
