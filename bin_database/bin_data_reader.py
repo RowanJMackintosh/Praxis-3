@@ -8,8 +8,9 @@ MAX_WEIGHT = 90
 
 # FIX - This is for testing, Where is the real path?
 
-FILENAME = "example_readings.txt"
-BIN_UPDATE_FILE_PATH = Path(__file__).with_name(FILENAME)
+os.path.dirname(os.path.dirname(__file__))
+
+BIN_UPDATE_FILE_PATH = os.path.dirname(os.path.dirname(__file__)) + "/data_loader/readings.txt"
 
 
 class Update:
@@ -34,30 +35,28 @@ def full_status(weight):
 def get_bin_updates():
     updates = []
 
+    with open(BIN_UPDATE_FILE_PATH, "r") as first_file, open("temp_file.txt", "w") as second_file:
+        for line in first_file:
+            second_file.write(line)
 
-    new_file = BIN_UPDATE_FILE_PATH+"_tmp"
-    try:
-        os.rename(BIN_UPDATE_FILE_PATH, new_file)
+    with open("temp_file.txt", "r") as file: #fill in the name of the file
 
-        with open(new_file, "r") as file: #fill in the name of the file
+        while True:
+            # Get next line from file
+            line = file.readline()
+            # if line is empty
+            # end of file is reached
+            if not line:
+                break
 
-            while True:
-                temp = []
-            
-                # Get next line from file
-                line = file.readline()
-                # if line is empty
-                # end of file is reached
-                if not line:
-                    break
-
-                update = parse_update(line)
-                if update:
-                    updates.append(update)
-    except FileNotFoundError:
-        return None
-    finally:
-        os.remove(new_file)
+            update = parse_update(line)
+            print(update)
+            if update:
+                updates.append(update)
+        
+        os.remove("temp_file.txt")
+    return updates
+   
 
 
 def parse_update(line):

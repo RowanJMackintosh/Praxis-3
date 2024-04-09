@@ -47,6 +47,7 @@ def main():
 
         # fetch a bin update from the bin web thing and parse it into something we can use
         update_list = bin_data_reader.get_bin_updates()
+        print(update_list)
         for update in update_list:
             # use the latitude and longitude from the update to find the bin that is the closest distance to 
             # this position and assume it is that bin. Maybe should check that the distance is not too reduculous?
