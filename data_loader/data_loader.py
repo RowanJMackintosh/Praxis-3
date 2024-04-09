@@ -20,7 +20,7 @@ while True:
             clear_file = (clear_file + 1)%30 #keeps count of number of strings in file
             with open(FILENAME, "a+") as file:
                 file.write(data_string.value + " | " + data_string.updated_at + "\n") #writes data to text file
-    
+    prev_string = data_string
     if clear_file == 9:
         open(FILENAME, 'w').close() #clears file if it reaches a specified number of strings (in this case 10)
         
